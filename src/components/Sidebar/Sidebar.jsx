@@ -89,8 +89,12 @@ class Sidebar extends React.Component {
             className="simple-text logo-mini"
             onClick={this.props.toggleSidebar}
           >
+            {/* TODO: Figure out a way to pass in icon props to change the color via props not css */}
             <div className="logo-img">
-              <img src={logo.imgSrc} alt="react-logo" />
+              { logo.logoType === "image" ?
+                  <img src={logo.imgSrc} alt="react-logo" /> :
+                  <i className={ logo.imgSrc} />
+              }
             </div>
           </Link>
         );
@@ -152,7 +156,7 @@ Sidebar.defaultProps = {
 
 Sidebar.propTypes = {
   // if true, then instead of the routes[i].name, routes[i].rtlName will be rendered
-  // insde the links of this component
+  // inside the links of this component
   rtlActive: PropTypes.bool,
   bgColor: PropTypes.oneOf(["primary", "blue", "green"]),
   routes: PropTypes.arrayOf(PropTypes.object),
@@ -166,7 +170,8 @@ Sidebar.propTypes = {
     // the text of the logo
     text: PropTypes.node,
     // the image src of the logo
-    imgSrc: PropTypes.string
+    imgSrc: PropTypes.string,
+    logoType: PropTypes.oneOf(["image", "icon"]),
   })
 };
 
