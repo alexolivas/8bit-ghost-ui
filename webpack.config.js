@@ -53,7 +53,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist/'),
 		// library: 'bv-theme',
 		// publicPath: '',
-		filename: 'bluvector-ui.js',
+		filename: '8bit-ghost-ui.js',
 		libraryTarget: 'umd',
 		// libraryTarget: 'commonjs',
 	},
