@@ -1,33 +1,58 @@
 {
-  "name": "black-dashboard-react",
-  "version": "1.0.0",
-  "private": true,
+  "name": "8bit-ghost-ui",
+  "version": "1.0.0-beta.3",
+  "private": false,
   "homepage": "https://creativetimofficial.github.io/black-dashboard-react/#/dashboard",
+  "files": [
+    "dist",
+    "src/assets"
+  ],
+  "main": "dist/8bit-ghost-ui.js",
+  "module": "dist/8bit-ghost-ui.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "@types/react": "16.4.16",
-    "bootstrap": "4.1.3",
-    "chart.js": "^2.7.2",
+    "bootstrap": "4.3.1",
+    "chart.js": "2.7.3",
     "classnames": "2.2.6",
     "history": "4.7.2",
-    "node-sass": "4.9.3",
+    "node-sass": "^4.13.1",
     "perfect-scrollbar": "1.4.0",
-    "prop-types": "^15.6.2",
-    "react": "16.5.2",
-    "react-chartjs-2": "^2.7.4",
-    "react-dom": "16.5.2",
+    "prop-types": "15.6.2",
+    "react": "^16.12.0",
+    "react-chartjs-2": "2.7.4",
+    "react-dom": "16.13.0",
     "react-google-maps": "9.4.5",
-    "react-notification-alert": "0.0.8",
-    "react-router-dom": "4.3.1",
-    "react-scripts": "2.0.4",
-    "reactstrap": "6.5.0"
+    "react-notification-alert": "0.0.9",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "reactstrap": "8.4.1"
+  },
+  "optionalDependencies": {
+    "@types/googlemaps": "3.30.16",
+    "@types/markerclustererplus": "2.1.33",
+    "@types/react": "16.7.18"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "storybook": "start-storybook",
+    "update:major": "semver -i major",
+    "update:minor": "semver -i minor",
+    "update:patch": "semver -i patch",
+    "update:prerelease": "semver -i prerelease",
+    "test": "jest --verbose ./8bit",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "compile-scss": "node-sass src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css"
+    "compile-scss": "node-sass src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css",
+    "map-sass": "node-sass src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css --source-map true"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/8bit/**/*.{js,jsx}"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +62,24 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/preset-create-react-app": "^2.0.0",
+    "@storybook/react": "^5.3.14",
+    "axios": "^0.19.2",
+    "axios-mock-adapter": "^1.17.0",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "semver": "^7.1.3",
+    "storybook-react-router": "^1.0.8",
+    "webpack-cli": "^3.3.10"
+  }
 }
