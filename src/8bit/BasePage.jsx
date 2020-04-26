@@ -42,11 +42,11 @@ class BasePageHOC extends React.Component {
 		}
 
 		// TODO: just like the theme this needs to also happen when new props are received
-		if ( sidebarCollapsed ) {
-			document.body.classList.add("sidebar-mini");
-		} else {
-			document.body.classList.remove("sidebar-mini");
-		}
+		// if ( sidebarCollapsed ) {
+		// 	document.body.classList.add("sidebar-mini");
+		// } else {
+		// 	document.body.classList.remove("sidebar-mini");
+		// }
 
 		// sidebar-mini
 		if (navigator.platform.indexOf("Win") > -1) {
@@ -58,7 +58,7 @@ class BasePageHOC extends React.Component {
 				ps = new PerfectScrollbar(tables[i]);
 			}
 		}
-		window.addEventListener("scroll", () => this.showNavbarButton());
+		// window.addEventListener("scroll", () => this.showNavbarButton());
 	}
 
 	componentWillUnmount() {
@@ -67,7 +67,7 @@ class BasePageHOC extends React.Component {
 			document.documentElement.className += " perfect-scrollbar-off";
 			document.documentElement.classList.remove("perfect-scrollbar-on");
 		}
-		window.removeEventListener("scroll", () => this.showNavbarButton());
+		// window.removeEventListener("scroll", () => this.showNavbarButton());
     }
 
 	componentDidUpdate(e) {
@@ -88,21 +88,21 @@ class BasePageHOC extends React.Component {
 	 * Responsible for showing the navbar button when the user is all the way at the top
 	 * or showing the opaque version of it when the are scrolled down
 	 */
-	showNavbarButton() {
-		if (
-			document.documentElement.scrollTop > 50 ||
-			document.scrollingElement.scrollTop > 50 ||
-			this.refs.mainPanel.scrollTop > 50
-		) {
-			this.setState({ opacity: 1 });
-		} else if (
-			document.documentElement.scrollTop <= 50 ||
-			document.scrollingElement.scrollTop <= 50 ||
-			this.refs.mainPanel.scrollTop <= 50
-		) {
-			this.setState({ opacity: 0 });
-		}
-	}
+	// showNavbarButton() {
+	// 	if (
+	// 		document.documentElement.scrollTop > 50 ||
+	// 		document.scrollingElement.scrollTop > 50 ||
+	// 		this.refs.mainPanel.scrollTop > 50
+	// 	) {
+	// 		this.setState({ opacity: 1 });
+	// 	} else if (
+	// 		document.documentElement.scrollTop <= 50 ||
+	// 		document.scrollingElement.scrollTop <= 50 ||
+	// 		this.refs.mainPanel.scrollTop <= 50
+	// 	) {
+	// 		this.setState({ opacity: 0 });
+	// 	}
+	// }
 
 	/**
 	 * This method is responsible for getting the route the user is on and getting the route's
@@ -110,51 +110,58 @@ class BasePageHOC extends React.Component {
 	 * to the one that's been configured (defaults to "/")
 	 * @param {*} routes 
 	 */
-	getActiveRoute(routes) {
-		const pathname = window.location.pathname;
-		const hash = window.location.hash;
-		const activeRoute = activeRoute ? activeRoute : this.props.defaultActiveRoute;
-		for (let i = 0; i < routes.length; i++) {
-			if (routes[i].collapse) {
-				let collapseActiveRoute = this.getActiveRoute(routes[i].views);
-				if (collapseActiveRoute !== activeRoute) {
-					return collapseActiveRoute;
-				}
-			} else {
-				const currRoutePath = routes[i].layout + routes[i].path;
-				// This checks the path taking into account both BrowserRouter (/route)
-				// and HashRouter (#/route)
-				if ( pathname.indexOf(currRoutePath) !== -1 || hash.indexOf(currRoutePath) !== -1 ) {
-					// return routes[i].name;
-					return routes[i];
-				}
-			}
-		}
-		return null;
-	}
+	// getActiveRoute(routes) {
+	// 	const { defaultActiveRoute } = this.props;
+	// 	// let activeRoute = "Default Brand Text";
+	// 	// window.console.log("getting active route..");
+	// 	const pathname = window.location.pathname;
+	// 	const hash = window.location.hash;
+	// 	// window.console.log(`pathname: ${ pathname }`);
+	// 	// window.console.log(`hash: ${ hash }`);
+	// 	// window.console.log(`defaultActiveRoute: ${ defaultActiveRoute }`);
+	// 	// // const activeRoute = activeRoute ? activeRoute : defaultActiveRoute;
+	// 	for (let i = 0; i < routes.length; i++) {
+	// 		if (routes[i].collapse) {
+	// 			let collapseActiveRoute = this.getActiveRoute(routes[i].views);
+	// 			if (collapseActiveRoute !== defaultActiveRoute) {
+	// 				return collapseActiveRoute;
+	// 			}
+	// 		} else {
+	// 			const currRoutePath = routes[i].layout + routes[i].path;
+	// 			// This checks the path taking into account both BrowserRouter (/route)
+	// 			// and HashRouter (#/route)
+	// 			if ( pathname.indexOf(currRoutePath) !== -1 || hash.indexOf(currRoutePath) !== -1 ) {
+	// 				window.console.log(`active route is: ${ routes[i] }`);
+	// 				// return routes[i].name;
+	// 				return routes[i];
+	// 			}
+	// 		}
+	// 	}
+	// 	return null;
+	// }
 
-	toggleThemeMode() {
-		// Look at FixedPlugin.jsx to implement this but this should set "white-content" if "light" is passed in
-		document.body.classList.toggle("white-content");
-	}
+	// toggleThemeMode() {
+	// 	// Look at FixedPlugin.jsx to implement this but this should set "white-content" if "light" is passed in
+	// 	document.body.classList.toggle("white-content");
+	// }
 
 	/**
 	 * This method is responsible for toggling the sidebar between mini and expanded.
 	 * NOTE: This is how the example code came, I know its odd that there's a handleMiniClick
 	 * and a toggleSideBar
 	 */
-    handleMiniClick() {
-        document.body.classList.toggle("sidebar-mini");
-	}
+    // handleMiniClick() {
+    //     document.body.classList.toggle("sidebar-mini");
+	// }
 
 	/**
 	 * Responsible for toggling the sidebar from open to close
 	 */
 	toggleSidebar() {
+		document.documentElement.classList.toggle("nav-open");
 		this.setState({
 			sidebarOpened: !this.state.sidebarOpened
 		});
-		document.documentElement.classList.toggle("nav-open");
 	}
 
 	/**
@@ -163,17 +170,29 @@ class BasePageHOC extends React.Component {
 	 * the docs >> this is used on responsive to close the sidebar on route
 	 * navigation
 	 */
-    closeSidebar() {
-        this.setState({
-            sidebarOpened: false,
-		});
-		document.documentElement.classList.remove("nav-open");
-    };
+    // closeSidebar() {
+    //     this.setState({
+    //         sidebarOpened: false,
+	// 	});
+	// 	document.documentElement.classList.remove("nav-open");
+	// }
+
+	getBrandText(path) {
+		const { location, routes } = this.props;
+		for (let i = 0; i < routes.length; i++) {
+			// if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+			if (location.pathname.indexOf(routes[i].path) !== -1) {
+				return routes[i].name;
+			}
+		}
+		// Default to the very first route if one isn't found
+		return routes[0].name;
+	}
 
     render() {
-		const activeRoute = this.getActiveRoute(this.props.routes);
-		const brandText = activeRoute ? activeRoute.name : this.props.defaultActiveRoute;
-		const brandUrl = activeRoute ? activeRoute.path : "/";
+		// const activeRoute = this.getActiveRoute(this.props.routes);
+		// const brandText = activeRoute ? activeRoute.name : this.props.defaultActiveRoute;
+		// const brandUrl = activeRoute ? activeRoute.path : "/";
 		const {
 			activeColor,
 			location,
@@ -185,32 +204,22 @@ class BasePageHOC extends React.Component {
 		} = this.props;
         return (
             <div className="wrapper">
-				<div className="rna-container">
-					{/* <NotificationAlert ref="notificationAlert" /> */}
+				{/* TODO: add this back */}
+				{/* <div className="rna-container">
 					<NotificationAlert ref={ notificationRef } />
-				</div>
-				<div
-					className="navbar-minimize-fixed"
-					style={{ opacity: this.state.opacity }}>
-					<button
-						className="minimize-sidebar btn btn-link btn-just-icon"
-						onClick={ () => this.handleMiniClick() }>
-						<i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
-						<i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
-					</button>
-				</div>
+				</div> */}
                 <Sidebar
                     { ...this.props }
                     routes={ routes }
-                    activeColor={ activeColor }
+                    bgColor={ activeColor }
                     logo={ sidebarLogo }
-                    closeSidebar={ () => this.closeSidebar() } />
+                    toggleSidebar={ () => this.toggleSidebar() }
+				/>
                 <div className="main-panel" ref="mainPanel" data={ activeColor }>
                     <BaseNavbar
 						location={ location }
-                        handleMiniClick={ () => this.handleMiniClick() }
-						brandText={ brandText }
-						brandUrl={ brandUrl }
+                        // handleMiniClick={ () => this.handleMiniClick() }
+						brandText={ this.getBrandText(location.pathname) }
                         sidebarOpened={ sidebarOpened }
 						toggleSidebar={ this.toggleSidebar }
 						render={ renderNavbar }
@@ -227,7 +236,7 @@ class BasePageHOC extends React.Component {
 
 BasePageHOC.propTypes = {
 	// Main color used by the sidebar
-	activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red"]),
+	activeColor: PropTypes.oneOf(["primary", "blue", "green"]),
 
 	// Determines if main theme is dark or light, defaults to dark
 	themeMode: PropTypes.oneOf(["dark", "light"]),
@@ -277,7 +286,7 @@ BasePageHOC.propTypes = {
 BasePageHOC.defaultProps = {
 	activeColor: "blue",
 	themeMode: "dark",
-	defaultActiveRoute: "/",
+	defaultActiveRoute: "Test",
 	sidebarLogo: {
 		innerLink: "/",
 		text: "8Bit Ghost",

@@ -71,22 +71,6 @@ class BaseNavbar extends React.Component {
 				<Navbar className={classNames("navbar-absolute", { [this.state.color]: this.props.location.pathname.indexOf("full-screen-map") === -1 })} expand="lg">
 					<Container fluid>
 						<div className="navbar-wrapper">
-							<div className="navbar-minimize d-inline">
-								<Button
-									className="minimize-sidebar btn-just-icon"
-									color="link"
-									id="tooltip209599"
-									onClick={ this.props.handleMiniClick }>
-									<i className="tim-icons icon-align-center visible-on-sidebar-regular" />
-									<i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini" />
-								</Button>
-								<UncontrolledTooltip
-									delay={0}
-									target="tooltip209599"
-									placement="right">
-									Sidebar toggle
-								</UncontrolledTooltip>
-							</div>
 							<div className={classNames("navbar-toggle d-inline", { toggled: this.props.sidebarOpened })}>
 								<button
 									className="navbar-toggler"
@@ -97,7 +81,7 @@ class BaseNavbar extends React.Component {
 									<span className="navbar-toggler-bar bar3" />
 								</button>
 							</div>
-							<NavbarBrand href={ this.props.brandUrl }>
+							<NavbarBrand href="#">
 								{ this.props.brandText }
 							</NavbarBrand>
 						</div>
